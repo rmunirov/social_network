@@ -1,0 +1,13 @@
+.list {
+    background-color: orange;
+    padding: 20px;
+}
+
+.item a {
+    text-decoration: none;
+    color: white;
+}
+
+.item a.active {
+    color: gold;
+}

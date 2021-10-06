@@ -1,0 +1,8 @@
+.formControl.blockError {
+    border: 1px solid red;
+    display: inline-flex;
+}
+
+.formControl.textError {
+    color: red;
+}

@@ -1,0 +1,8 @@
+.message_start {
+    align-self: flex-start;
+}
+
+.message_end {
+    align-self: flex-end;
+}
+

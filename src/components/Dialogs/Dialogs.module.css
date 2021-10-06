@@ -1,0 +1,36 @@
+.dialogs {
+    display: grid;
+    grid-template-areas:
+            'i m'
+            't t';
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.dialogItems {
+    grid-area: i;
+}
+
+.dialogItems a {
+    text-decoration: none;
+}
+
+
+.item {
+
+}
+
+.item.active {
+    color: gold;
+}
+
+.messages {
+    grid-area: m;
+    display: flex;
+    flex-direction: column;
+}
+
+.new_message {
+    grid-area: t;
+}
