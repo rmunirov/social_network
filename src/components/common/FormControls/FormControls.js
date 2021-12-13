@@ -1,35 +1,54 @@
-import React from "react";
-import styles from "./FormControls.module.css"
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames/bind';
+import styles from './FormControls.module.scss';
+
+const cn = classNames.bind(styles);
+const CLASS_NAME = 'FormControls';
 
 export const TextArea = (props) => {
-    const {input, meta, ...restProps} = props;
+    const { input, ...restProps } = props;
     return (
         <FormControl {...props}>
-            <textarea {...input} {...restProps}/>
+            <textarea {...input} {...restProps} />
         </FormControl>
-    )
-}
+    );
+};
+
+TextArea.propTypes = {
+    input: PropTypes.object,
+};
 
 export const Input = (props) => {
-    const {input, meta, ...restProps} = props;
+    const { input, ...restProps } = props;
     return (
         <FormControl {...props}>
-            <input {...input} {...restProps}/>
+            <input {...input} {...restProps} />
         </FormControl>
-    )
-}
+    );
+};
 
-export const FormControl = ({input, meta, ...props}) => {
+Input.propTypes = {
+    input: PropTypes.object,
+};
+
+export const FormControl = ({ meta, ...props }) => {
     const hasError = (meta.error || meta.submitError) && meta.touched;
-    const blockClassName = `${styles.formControl} ${hasError ? styles.blockError : null}`;
-    const textClassName = `${styles.formControl} ${hasError ? styles.textError : null}`;
     return (
         <div>
-            <div className={blockClassName}>
+            <div className={cn(CLASS_NAME, { [`${CLASS_NAME}__blockError`]: hasError })}>
                 {props.children}
             </div>
-            {hasError && <span className={textClassName}>{meta.error || meta.submitError}</span>}
+            {hasError && (
+                <span className={cn(CLASS_NAME, { [`${CLASS_NAME}__textError`]: hasError })}>
+                    {meta.error || meta.submitError}
+                </span>
+            )}
         </div>
-    )
-}
+    );
+};
 
+FormControl.propTypes = {
+    children: PropTypes.object,
+    meta: PropTypes.object,
+};

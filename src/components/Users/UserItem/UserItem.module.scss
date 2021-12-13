@@ -1,0 +1,66 @@
+.UserItem {
+  display: flex;
+  margin: 10px 30px;
+
+  &__avatar {
+    display: flex;
+    flex-basis: 12%;
+    flex-direction: column;
+
+    img {
+      background-size: cover;
+      height: 100px;
+      width: 100px;
+    }
+
+    button {
+      background-color: green;
+      color: white;
+      font-size: 20px;
+      margin-top: 10px;
+      width: 100px;
+
+      &:disabled {
+        background-color: grey;
+      }
+    }
+  }
+
+  &__info {
+    align-self: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+    display: flex;
+    flex-basis: 60%;
+    justify-content: space-between;
+
+    &__left {
+      flex-direction: column;
+
+      &__name {
+        font-size: 20px;
+        margin: 10px;
+      }
+
+      &__status {
+        margin: 30px 0 5px 10px;
+      }
+    }
+
+    &__right {
+      flex-direction: column;
+
+      &__country {
+        font-size: 20px;
+        margin: 10px;
+        text-align: right;
+      }
+
+      &__city {
+        font-size: 20px;
+        margin: 10px;
+        text-align: right;
+      }
+    }
+  }
+}

@@ -1,40 +1,56 @@
-import React from 'react'
-import styles from './Navbar.module.css'
-import {NavLink} from "react-router-dom";
-import FriendListContainer from "./FriendList/FriendListContainer";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import classNames from 'classnames/bind';
+import styles from './Navbar.module.scss';
+import FriendListContainer from './FriendList/FriendListContainer';
 
-const Navbar = (props) => {
+const cn = classNames.bind(styles);
+const CLASS_NAME = 'Navbar';
+
+const Navbar = () => {
     return (
         <div>
-            <nav className={styles.nav}>
-                <div className={`${styles.item} ${styles.active}`}>
-                    <NavLink to='/profile' activeClassName={styles.active}>Profile</NavLink>
+            <nav className={cn(CLASS_NAME)}>
+                <div className={cn(`${CLASS_NAME}__item`)}>
+                    <NavLink to="/profile" activeClassName={cn(`${CLASS_NAME}__active`)}>
+                        Profile
+                    </NavLink>
                 </div>
 
-                <div className={styles.item}>
-                    <NavLink to='/dialogs' activeClassName={styles.active}>Messages</NavLink>
+                <div className={cn(`${CLASS_NAME}__item`)}>
+                    <NavLink to="/dialogs" activeClassName={cn(`${CLASS_NAME}__active`)}>
+                        Messages
+                    </NavLink>
                 </div>
 
-                <div className={styles.item}>
-                    <NavLink to='/news' activeClassName={styles.active}>News</NavLink>
+                <div className={cn(`${CLASS_NAME}__item`)}>
+                    <NavLink to="/news" activeClassName={cn(`${CLASS_NAME}__active`)}>
+                        News
+                    </NavLink>
                 </div>
 
-                <div className={styles.item}>
-                    <NavLink to='/music' activeClassName={styles.active}>Music</NavLink>
+                <div className={cn(`${CLASS_NAME}__item`)}>
+                    <NavLink to="/music" activeClassName={cn(`${CLASS_NAME}__active`)}>
+                        Music
+                    </NavLink>
                 </div>
 
-                <div className={styles.item}>
-                    <NavLink to='/users' activeClassName={styles.active}>Find users</NavLink>
+                <div className={cn(`${CLASS_NAME}__item`)}>
+                    <NavLink to="/users" activeClassName={cn(`${CLASS_NAME}__active`)}>
+                        Find users
+                    </NavLink>
                 </div>
 
-                <div className={styles.item}>
-                    <NavLink to='/settings' activeClassName={styles.active}>Settings</NavLink>
+                <div className={cn(`${CLASS_NAME}__item`)}>
+                    <NavLink to="/settings" activeClassName={cn(`${CLASS_NAME}__active`)}>
+                        Settings
+                    </NavLink>
                 </div>
             </nav>
 
-            <FriendListContainer/>
+            <FriendListContainer />
         </div>
     );
-}
+};
 
 export default Navbar;

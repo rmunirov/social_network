@@ -1,0 +1,19 @@
+.Navbar {
+  background-color: orange;
+  grid-area: n;
+  padding: 20px;
+
+  &__item {
+    a {
+      text-decoration: none;
+
+      &:active {
+        color: gold;
+      }
+    }
+  }
+
+  &__active {
+    color: gold;
+  }
+}

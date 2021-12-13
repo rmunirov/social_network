@@ -1,0 +1,23 @@
+.Dialogs {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-areas:
+    "i m"
+    "t t";
+  grid-template-columns: 2fr 10fr;
+  padding: 10px;
+
+  &__dialogItems {
+    grid-area: i;
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    grid-area: m;
+  }
+
+  &__newMessage {
+    grid-area: t;
+  }
+}

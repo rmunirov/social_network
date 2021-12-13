@@ -2,12 +2,19 @@
   "name": "learn",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://rmunirov.github.io/social_network/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "classnames": "^2.3.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "final-form": "^4.20.2",
+    "node-sass": "^6.0.1",
+    "postcss": "^8.3.11",
+    "postcss-scss": "^4.0.2",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-final-form": "^6.5.3",
@@ -24,7 +31,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "lint:fix": "eslint \"./**\" --fix "
   },
   "eslintConfig": {
     "extends": [
@@ -45,8 +55,26 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/preset-react": "^7.16.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-unused-imports": "^1.1.5",
+    "gh-pages": "^3.2.3",
+    "prettier": "2.4.1",
     "react-test-renderer": "^17.0.2",
+    "sass": "^1.43.4",
+    "sass-loader": "^10.1.1",
     "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^22.0.0"
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "webpack": "^4.44.2"
   }
 }

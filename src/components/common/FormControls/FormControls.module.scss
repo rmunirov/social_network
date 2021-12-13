@@ -1,8 +1,10 @@
-.formControl.blockError {
+.FormControls {
+  &__blockError {
     border: 1px solid red;
     display: inline-flex;
-}
+  }
 
-.formControl.textError {
+  &__textError {
     color: red;
+  }
 }

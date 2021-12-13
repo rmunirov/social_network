@@ -1,0 +1,17 @@
+.Header {
+  align-items: center;
+  background-color: green;
+  display: flex;
+  grid-area: h;
+  justify-content: space-between;
+
+  &__photo {
+    img {
+      max-width: 50px;
+    }
+  }
+
+  &__login {
+    margin: 10px;
+  }
+}

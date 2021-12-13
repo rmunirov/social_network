@@ -1,8 +1,9 @@
-.message_start {
+.Message {
+  &__messageStart {
     align-self: flex-start;
-}
+  }
 
-.message_end {
+  &__messageEnd {
     align-self: flex-end;
+  }
 }
-

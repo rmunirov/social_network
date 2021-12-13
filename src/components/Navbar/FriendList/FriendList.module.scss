@@ -1,0 +1,17 @@
+.FriendList {
+  &__list {
+    background-color: orange;
+    padding: 20px;
+  }
+
+  &__item {
+    a {
+      color: white;
+      text-decoration: none;
+
+      &:active {
+        color: gold;
+      }
+    }
+  }
+}

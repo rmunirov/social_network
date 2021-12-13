@@ -1,16 +1,36 @@
-import React from 'react'
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import PostsContainer from "./Posts/PostsContainer";
-import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import PostsContainer from './Posts/PostsContainer';
+import styles from './ProfileStatus/ProfileStatus.module.scss';
 
-const Profile = ({profile, status, setStatus, getStatus}) => {
+const cn = classNames.bind(styles);
+const CLASS_NAME = 'Profile';
+
+const Profile = ({ profile, status, setStatus, updatePhoto, isOwner, updateProfile }) => {
     return (
-        <div>
-            <ProfileInfo profile={profile}/>
-            <ProfileStatus status={status} setStatus={setStatus} getStatus={getStatus}/>
-            <PostsContainer/>
+        <div className={cn(CLASS_NAME)}>
+            <ProfileInfo
+                profile={profile}
+                updatePhoto={updatePhoto}
+                isOwner={isOwner}
+                status={status}
+                setStatus={setStatus}
+                updateProfile={updateProfile}
+            />
+            <PostsContainer />
         </div>
     );
-}
+};
+
+Profile.propTypes = {
+    profile: PropTypes.object,
+    status: PropTypes.string,
+    setStatus: PropTypes.func,
+    updatePhoto: PropTypes.func,
+    isOwner: PropTypes.bool,
+    updateProfile: PropTypes.func,
+};
 
 export default Profile;

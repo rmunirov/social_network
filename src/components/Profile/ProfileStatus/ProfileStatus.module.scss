@@ -1,0 +1,14 @@
+.ProfileStatus {
+  color: grey;
+  margin-bottom: 10px;
+
+  &__text {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+
+    &:hover {
+      background-color: lightgrey;
+    }
+  }
+}

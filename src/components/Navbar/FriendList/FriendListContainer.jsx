@@ -1,17 +1,15 @@
-import {connect} from "react-redux";
-import FriendList from "./FriendList";
+import { connect } from 'react-redux';
+import FriendList from './FriendList';
 
 const mapStateToProps = (state) => {
     return {
         friendList: state.sidebar.friends,
-    }
-}
+    };
+};
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
-}
+const mapDispatchToProps = () => {
+    return {};
+};
 
 const FriendListContainer = connect(mapStateToProps, mapDispatchToProps)(FriendList);
 

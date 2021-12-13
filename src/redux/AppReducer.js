@@ -1,4 +1,4 @@
-import {authMe} from "./AuthReducer";
+import { authMe } from './AuthReducer';
 
 const SET_IS_INITIALIZED = 'learn/app/SET_IS_INITIALIZED';
 
@@ -17,15 +17,15 @@ const appReducer = (state = initialState, action = {}) => {
         default:
             return state;
     }
-}
+};
 
-export const setInitializedState = () => ({type: SET_IS_INITIALIZED});
+export const setInitializedState = () => ({ type: SET_IS_INITIALIZED });
 
 export const appInitialize = () => {
     return async (dispatch) => {
         await dispatch(authMe());
         dispatch(setInitializedState());
-    }
-}
+    };
+};
 
 export default appReducer;
