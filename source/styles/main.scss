@@ -1,0 +1,27 @@
+@import "./scss/constants.scss";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'SB Sans Display', Arial, Helvetica, sans-serif;
+  min-width: 764px;
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --app-layout-gorizontal-padding: 48px;
+  --table-row-gorizontal-margin: -48px;
+
+  //@media ($media-tablet) {
+  //  --app-layout-gorizontal-padding: 32px;
+  //  --table-row-gorizontal-margin: -32px;
+  //}
+}

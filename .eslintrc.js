@@ -11,6 +11,7 @@ module.exports = {
     extends: ['prettier', 'eslint:recommended', 'plugin:react/recommended'],
     env: {
         node: true, // for module.export
+        browser: true,
     },
     rules: {
         'prettier/prettier': [

@@ -1,8 +1,9 @@
-import './App.scss';
 import React, { Component, Suspense } from 'react';
 import { connect, Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
+import styles from './Application.module.scss';
 import {
     DIALOGS_ROUTE,
     LOGIN_ROUTE,
@@ -27,7 +28,10 @@ import ErrorBoundary from './utils/errorBoundary/ErrorBoundary';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 
-class App extends Component {
+const cn = classNames.bind(styles);
+const CLASS_NAME = 'Application';
+
+class Application extends Component {
     componentDidMount() {
         this.props.appInitialize();
     }
@@ -38,10 +42,10 @@ class App extends Component {
         }
 
         return (
-            <div className="app-wrapper">
+            <div className={cn(CLASS_NAME)}>
                 <HeaderContainer />
                 <Navbar />
-                <div className="app-wrapper-content">
+                <div>
                     <ErrorBoundary>
                         <Suspense fallback={<Preloader />}>
                             <section>
@@ -61,7 +65,7 @@ class App extends Component {
     }
 }
 
-App.propTypes = {
+Application.propTypes = {
     appInitialize: PropTypes.func,
     isInit: PropTypes.bool,
 };
@@ -76,16 +80,16 @@ const mapDispatchToProps = {
     appInitialize,
 };
 
-const AppConnect = connect(mapStateToProps, mapDispatchToProps)(App);
+const AppConnect = connect(mapStateToProps, mapDispatchToProps)(Application);
 
 const AppWithStore = () => {
     return (
         <React.StrictMode>
-            <BrowserRouter>
+            <Router>
                 <Provider store={store}>
                     <AppConnect />
                 </Provider>
-            </BrowserRouter>
+            </Router>
         </React.StrictMode>
     );
 };
