@@ -1,14 +1,20 @@
 module.exports = {
     root: true,
-    parser: '@babel/eslint-parser',
+    parser: '@typescript-eslint/parser',
     parserOptions: {
         requireConfigFile: false,
         babelOptions: {
             presets: ['@babel/preset-react'],
         },
     },
-    plugins: ['prettier', 'import', 'unused-imports'],
-    extends: ['prettier', 'eslint:recommended', 'plugin:react/recommended'],
+    plugins: ['prettier', 'import', 'unused-imports', '@typescript-eslint'],
+    extends: [
+        'prettier',
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+    ],
     env: {
         node: true, // for module.export
         browser: true,
@@ -46,5 +52,8 @@ module.exports = {
         ],
         'react/no-array-index-key': 0,
         'unused-imports/no-unused-imports': 'error',
+        '@typescript-eslint/no-var-requires': 0,
+        '@typescript-eslint/no-unused-vars': ['error'],
+        '@typescript-eslint/no-explicit-any': 'off',
     },
 };

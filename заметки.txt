@@ -674,3 +674,12 @@ class Foo extends Component {
 1. Webpack файл конфигурации
 2. SASS loader для упрощения путей импорта
 3. Что такое tags, нужно ли добавлять?
+
+
+#2 Курс
+
+## Что нужно использовать
+1 - TypeScript
+2 - Ant Design
+3 - Appolo GraphQL
+4 - Socket.IO
