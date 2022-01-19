@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Paginator.module.scss';
 
 const cn = classNames.bind(styles);
 const CLASS_NAME = 'Paginator';
 
-const NavButton = ({ name, action }) => {
+type NavButtonProps = {
+    name: string;
+    action: () => void;
+};
+
+const NavButton: FC<NavButtonProps> = ({ name, action }) => {
     return <button onClick={action}>{name}</button>;
 };
 
-NavButton.propTypes = {
-    name: PropTypes.string,
-    action: PropTypes.func,
+type PageProps = {
+    page: number;
+    currentPage: number;
+    onPageChanged: (page: number) => void;
 };
 
-const Page = ({ page, currentPage, onPageChanged }) => {
+const Page: FC<PageProps> = ({ page, currentPage, onPageChanged }) => {
     return (
         <span
             key={page.toString()}
@@ -29,13 +34,21 @@ const Page = ({ page, currentPage, onPageChanged }) => {
     );
 };
 
-Page.propTypes = {
-    page: PropTypes.number,
-    currentPage: PropTypes.number,
-    onPageChanged: PropTypes.func,
+type PaginatorProps = {
+    totalCount: number;
+    pageSize: number;
+    currentPage: number;
+    portionSize: number;
+    onPageChanged: () => void;
 };
 
-const Paginator = ({ totalCount, pageSize, currentPage, onPageChanged, portionSize = 10 }) => {
+const Paginator: FC<PaginatorProps> = ({
+    totalCount,
+    pageSize,
+    currentPage,
+    onPageChanged,
+    portionSize = 10,
+}) => {
     const pagesCount = Math.ceil(totalCount / pageSize);
 
     const pages = [];
@@ -98,14 +111,6 @@ const Paginator = ({ totalCount, pageSize, currentPage, onPageChanged, portionSi
             )}
         </div>
     );
-};
-
-Paginator.propTypes = {
-    totalCount: PropTypes.number,
-    pageSize: PropTypes.number,
-    currentPage: PropTypes.number,
-    portionSize: PropTypes.number,
-    onPageChanged: PropTypes.func,
 };
 
 export default Paginator;
