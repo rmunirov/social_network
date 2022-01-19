@@ -1,4 +1,11 @@
+import { Dialog, Message } from '../types/types';
+
 const ADD_MESSAGE = 'learn/dialogs/ADD_MESSAGE';
+
+type DialogsState = {
+    messages: Array<Message>;
+    dialogs: Array<Dialog>;
+};
 
 const initialState = {
     messages: [
@@ -14,15 +21,12 @@ const initialState = {
     ],
 };
 
-const dialogsReducer = (state = initialState, action = {}) => {
+const dialogsReducer = (state: DialogsState = initialState, action: any) => {
     switch (action.type) {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messages: [
-                    ...state.messages,
-                    { id: 4, message: action.newMessageText, profileId: 1 },
-                ],
+                messages: [...state.messages, { id: 4, message: action.payload, profileId: 1 }],
             };
 
         default:
@@ -30,6 +34,14 @@ const dialogsReducer = (state = initialState, action = {}) => {
     }
 };
 
-export const addMessage = (newMessageText) => ({ type: ADD_MESSAGE, newMessageText });
+type AddMessageActionType = {
+    type: typeof ADD_MESSAGE;
+    payload: string;
+};
+
+export const addMessage = (newMessageText: string): AddMessageActionType => ({
+    type: ADD_MESSAGE,
+    payload: newMessageText,
+});
 
 export default dialogsReducer;

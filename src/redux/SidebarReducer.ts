@@ -1,4 +1,10 @@
-const initialState = {
+import { Friend } from '../types/types';
+
+type SidebarState = {
+    friends: Array<Friend>;
+};
+
+const initialState: SidebarState = {
     friends: [
         { id: 1, name: 'Ilnur', age: 32 },
         { id: 2, name: 'Dunar', age: 32 },
@@ -7,7 +13,7 @@ const initialState = {
     ],
 };
 
-const sidebarReducer = (state = initialState) => {
+const sidebarReducer = (state: SidebarState = initialState) => {
     return state;
 };
 

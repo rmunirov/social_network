@@ -6,16 +6,11 @@ type AppState = {
     isInit: boolean;
 };
 
-type Action = {
-    type: string;
-    payload?: any;
-};
-
 const initialState: AppState = {
     isInit: false,
 };
 
-const appReducer = (state: AppState = initialState, action: Action): AppState => {
+const appReducer = (state: AppState = initialState, action: any): AppState => {
     switch (action.type) {
         case SET_IS_INITIALIZED:
             return {
@@ -28,10 +23,16 @@ const appReducer = (state: AppState = initialState, action: Action): AppState =>
     }
 };
 
-export const setInitializedState = (): Action => ({ type: SET_IS_INITIALIZED });
+type SetInitializedStateActionType = {
+    type: typeof SET_IS_INITIALIZED;
+};
+
+export const setInitializedState = (): SetInitializedStateActionType => ({
+    type: SET_IS_INITIALIZED,
+});
 
 export const appInitialize = () => {
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         await dispatch(authMe());
         dispatch(setInitializedState());
     };

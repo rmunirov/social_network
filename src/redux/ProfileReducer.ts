@@ -1,4 +1,5 @@
 import { ProfileApi } from '../api/api';
+import { Photos, Post, Profile } from '../types/types';
 
 const ADD_POST = 'learn/profile/ADD_POST';
 const SET_PROFILE_DATA = 'learn/profile/SET_PROFILE_DATA';
@@ -6,7 +7,14 @@ const SET_STATUS = 'learn/profile/SET_STATUS';
 const DELETE_POST = 'learn/profile/DELETE_POST';
 const UPDATE_PHOTO = 'learn/profile/UPDATE_PHOTO';
 
-const initialState = {
+type ProfileState = {
+    posts: Array<Post>;
+    newPost: string;
+    profile: Profile | null;
+    status: string;
+};
+
+const initialState: ProfileState = {
     posts: [
         { id: 1, message: 'Hi, broo', likesCount: 5 },
         { id: 2, message: 'How are you?', likesCount: 12 },
@@ -18,7 +26,7 @@ const initialState = {
     status: '',
 };
 
-const profileReducer = (state = initialState, action = {}) => {
+const profileReducer = (state: ProfileState = initialState, action: any) => {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -55,25 +63,59 @@ const profileReducer = (state = initialState, action = {}) => {
     }
 };
 
-export const addPost = (newPostText) => ({ type: ADD_POST, newPostText });
+type AddPostActionType = {
+    type: typeof ADD_POST;
+    newPostText: string;
+};
 
-export const deletePost = (postId) => ({ type: DELETE_POST, postId });
+export const addPost = (newPostText: string): AddPostActionType => ({
+    type: ADD_POST,
+    newPostText,
+});
 
-export const setProfile = (profile) => ({ type: SET_PROFILE_DATA, profile });
+type DeletePostActionType = {
+    type: typeof DELETE_POST;
+    postId: number;
+};
 
-export const updateStatus = (status) => ({ type: SET_STATUS, status });
+export const deletePost = (postId: number): DeletePostActionType => ({ type: DELETE_POST, postId });
 
-export const setPhoto = (photos) => ({ type: UPDATE_PHOTO, photos });
+type SetProfileActionType = {
+    type: typeof SET_PROFILE_DATA;
+    profile: Profile;
+};
 
-export const getProfile = (userId) => {
-    return async (dispatch) => {
+export const setProfile = (profile: Profile): SetProfileActionType => ({
+    type: SET_PROFILE_DATA,
+    profile,
+});
+
+type UpdateStatusActionType = {
+    type: typeof SET_STATUS;
+    status: string;
+};
+
+export const updateStatus = (status: string): UpdateStatusActionType => ({
+    type: SET_STATUS,
+    status,
+});
+
+type SetPhotoActionType = {
+    type: typeof UPDATE_PHOTO;
+    photos: Photos;
+};
+
+export const setPhoto = (photos: Photos): SetPhotoActionType => ({ type: UPDATE_PHOTO, photos });
+
+export const getProfile = (userId: number) => {
+    return async (dispatch: any) => {
         const data = await ProfileApi.getProfile(userId);
         dispatch(setProfile(data));
     };
 };
 
-export const setStatus = (status) => {
-    return async (dispatch) => {
+export const setStatus = (status: string) => {
+    return async (dispatch: any) => {
         const data = await ProfileApi.setStatus(status);
         if (data.resultCode === 0) {
             dispatch(updateStatus(status));
@@ -81,15 +123,15 @@ export const setStatus = (status) => {
     };
 };
 
-export const getStatus = (userId) => {
-    return async (dispatch) => {
+export const getStatus = (userId: number) => {
+    return async (dispatch: any) => {
         const data = await ProfileApi.getStatus(userId);
         dispatch(updateStatus(data));
     };
 };
 
-export const updatePhoto = (file) => {
-    return async (dispatch) => {
+export const updatePhoto = (file: any) => {
+    return async (dispatch: any) => {
         const data = await ProfileApi.updatePhoto(file);
         if (data.resultCode === 0) {
             dispatch(setPhoto(data.data.photos));
@@ -97,8 +139,8 @@ export const updatePhoto = (file) => {
     };
 };
 
-export const updateProfile = (profile) => {
-    return async (dispatch, getState) => {
+export const updateProfile = (profile: Profile) => {
+    return async (dispatch: any, getState: any) => {
         const data = await ProfileApi.updateProfile(profile);
         if (data.resultCode === 0) {
             dispatch(getProfile(getState().auth.id));
