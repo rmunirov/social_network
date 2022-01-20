@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { composeValidators, maxLength, required } from '../../utils/validators/validators';
 import { TextArea } from '../common/FormControls/FormControls';
+import { TDialog, TMessage } from '../../types/types';
 import styles from './Dialogs.module.scss';
-import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
+import DialogItem from './DialogItem/DialogItem';
 
 const cn = classNames.bind(styles);
 const CLASS_NAME = 'Dialogs';
 
-const MessageReduxForm = ({ onSubmit }) => {
+type MessageReduxFormProps = {
+    onSubmit: (formData: any) => void;
+    className: any;
+};
+
+const MessageReduxForm: FC<MessageReduxFormProps> = ({ onSubmit }) => {
     return (
         <Form
             onSubmit={onSubmit}
@@ -34,16 +39,18 @@ const MessageReduxForm = ({ onSubmit }) => {
     );
 };
 
-MessageReduxForm.propTypes = {
-    onSubmit: PropTypes.func,
+type DialogProps = {
+    dialogs: Array<TDialog>;
+    messages: Array<TMessage>;
+    addMessage: (message: string) => void;
 };
 
-const Dialogs = (props) => {
+const Dialogs: FC<DialogProps> = ({ dialogs, messages, addMessage }) => {
     const myProfileId = 1;
-    const dialogs = props.dialogs.map((dialog) => (
+    const dialogsElement = dialogs.map((dialog) => (
         <DialogItem key={dialog.id} name={dialog.name} id={dialog.id} />
     ));
-    const messages = props.messages.map((message) => (
+    const messagesElement = messages.map((message) => (
         <Message
             key={message.id}
             message={message.message}
@@ -52,23 +59,17 @@ const Dialogs = (props) => {
         />
     ));
 
-    const onAddMessage = (formData) => {
-        props.addMessage(formData.newMessageText);
+    const onAddMessage = (formData: any) => {
+        addMessage(formData.newMessageText);
     };
 
     return (
         <div className={cn(CLASS_NAME)}>
-            <div className={cn(`${CLASS_NAME}__dialogItems`)}>{dialogs}</div>
-            <div className={cn(`${CLASS_NAME}__messages`)}>{messages}</div>
+            <div className={cn(`${CLASS_NAME}__dialogItems`)}>{dialogsElement}</div>
+            <div className={cn(`${CLASS_NAME}__messages`)}>{messagesElement}</div>
             <MessageReduxForm className={cn(`${CLASS_NAME}__newMessage`)} onSubmit={onAddMessage} />
         </div>
     );
-};
-
-Dialogs.propTypes = {
-    dialogs: PropTypes.array,
-    messages: PropTypes.array,
-    addMessage: PropTypes.func,
 };
 
 export default Dialogs;

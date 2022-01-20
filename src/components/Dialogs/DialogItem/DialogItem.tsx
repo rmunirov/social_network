@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './DialogItem.module.scss';
 
 const cn = classNames.bind(styles);
 const CLASS_NAME = 'DialogItem';
 
-const DialogItem = (props) => {
-    const path = '/dialogs/' + props.id;
+type DialogItemProps = {
+    id: number;
+    name: string;
+};
+
+const DialogItem: FC<DialogItemProps> = ({ id, name }) => {
+    const path = '/dialogs/' + id;
     return (
         <div className={cn(CLASS_NAME, `${CLASS_NAME}__active`)}>
             <img
@@ -17,15 +21,10 @@ const DialogItem = (props) => {
                 alt={'default image'}
             />
             <NavLink to={path} activeClassName={cn(`${CLASS_NAME}__active`)}>
-                {props.name}
+                {name}
             </NavLink>
         </div>
     );
-};
-
-DialogItem.propTypes = {
-    id: PropTypes.number,
-    name: PropTypes.string,
 };
 
 export default DialogItem;

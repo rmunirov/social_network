@@ -1,5 +1,5 @@
 import { ProfileApi } from '../api/api';
-import { Photos, Post, Profile } from '../types/types';
+import { TPhotos, TPost, TProfile } from '../types/types';
 
 const ADD_POST = 'learn/profile/ADD_POST';
 const SET_PROFILE_DATA = 'learn/profile/SET_PROFILE_DATA';
@@ -8,9 +8,9 @@ const DELETE_POST = 'learn/profile/DELETE_POST';
 const UPDATE_PHOTO = 'learn/profile/UPDATE_PHOTO';
 
 type ProfileState = {
-    posts: Array<Post>;
+    posts: Array<TPost>;
     newPost: string;
-    profile: Profile | null;
+    profile: TProfile | null;
     status: string;
 };
 
@@ -82,10 +82,10 @@ export const deletePost = (postId: number): DeletePostActionType => ({ type: DEL
 
 type SetProfileActionType = {
     type: typeof SET_PROFILE_DATA;
-    profile: Profile;
+    profile: TProfile;
 };
 
-export const setProfile = (profile: Profile): SetProfileActionType => ({
+export const setProfile = (profile: TProfile): SetProfileActionType => ({
     type: SET_PROFILE_DATA,
     profile,
 });
@@ -102,10 +102,10 @@ export const updateStatus = (status: string): UpdateStatusActionType => ({
 
 type SetPhotoActionType = {
     type: typeof UPDATE_PHOTO;
-    photos: Photos;
+    photos: TPhotos;
 };
 
-export const setPhoto = (photos: Photos): SetPhotoActionType => ({ type: UPDATE_PHOTO, photos });
+export const setPhoto = (photos: TPhotos): SetPhotoActionType => ({ type: UPDATE_PHOTO, photos });
 
 export const getProfile = (userId: number) => {
     return async (dispatch: any) => {
@@ -139,7 +139,7 @@ export const updatePhoto = (file: any) => {
     };
 };
 
-export const updateProfile = (profile: Profile) => {
+export const updateProfile = (profile: TProfile) => {
     return async (dispatch: any, getState: any) => {
         const data = await ProfileApi.updateProfile(profile);
         if (data.resultCode === 0) {

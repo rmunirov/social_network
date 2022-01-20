@@ -1,21 +1,21 @@
-export type Message = {
+export type TMessage = {
     id: number;
     message: string;
     profileId: number;
 };
 
-export type Dialog = {
+export type TDialog = {
     id: number;
     name: string;
 };
 
-export type Post = {
+export type TPost = {
     id: number;
     message: string;
     likesCount: number;
 };
 
-export type Contacts = {
+export type TContacts = {
     github: string;
     vk: string;
     facebook: string;
@@ -26,36 +26,36 @@ export type Contacts = {
     mainLink: string;
 };
 
-export type Photos = {
+export type TPhotos = {
     small: string;
     large: string;
 };
 
-export type Profile = {
+export type TProfile = {
     userId: number;
     lookingForAJob: boolean;
     lookingForAJobDescription: string;
     fullName: string;
-    contacts: Contacts;
-    photos: Photos;
+    contacts: TContacts;
+    photos: TPhotos;
 };
 
-export type Friend = {
+export type TFriend = {
     id: number;
     name: string;
     age: number;
 };
 
-export type User = {
+export type TUser = {
     id: number;
     name: string;
     status: string;
-    photos: Photos;
+    photos: TPhotos;
     followed: boolean;
 };
 
-export type Users = {
-    items: Array<User>;
+export type TUsers = {
+    items: Array<TUser>;
     totalCount: number;
     error: string;
 };

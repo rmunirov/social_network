@@ -1,7 +1,7 @@
-import { Friend } from '../types/types';
+import { TFriend } from '../types/types';
 
 type SidebarState = {
-    friends: Array<Friend>;
+    friends: Array<TFriend>;
 };
 
 const initialState: SidebarState = {

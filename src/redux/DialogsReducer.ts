@@ -1,10 +1,10 @@
-import { Dialog, Message } from '../types/types';
+import { TDialog, TMessage } from '../types/types';
 
 const ADD_MESSAGE = 'learn/dialogs/ADD_MESSAGE';
 
 type DialogsState = {
-    messages: Array<Message>;
-    dialogs: Array<Dialog>;
+    messages: Array<TMessage>;
+    dialogs: Array<TDialog>;
 };
 
 const initialState = {

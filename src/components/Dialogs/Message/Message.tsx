@@ -1,12 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Message.module.scss';
 
 const cn = classNames.bind(styles);
 const CLASS_NAME = 'Message';
 
-const Message = ({ profileId, myProfileId, message }) => {
+type TMessageProps = {
+    profileId: number;
+    myProfileId: number;
+    message: string;
+};
+
+const Message: FC<TMessageProps> = ({ profileId, myProfileId, message }) => {
     return (
         <div
             className={cn({
@@ -17,12 +22,6 @@ const Message = ({ profileId, myProfileId, message }) => {
             {message}
         </div>
     );
-};
-
-Message.propTypes = {
-    profileId: PropTypes.number,
-    myProfileId: PropTypes.number,
-    message: PropTypes.string,
 };
 
 export default Message;

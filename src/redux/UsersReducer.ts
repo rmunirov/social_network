@@ -1,5 +1,5 @@
 import { FollowApi, UserApi } from '../api/api';
-import { User } from '../types/types';
+import { TUser } from '../types/types';
 
 const FOLLOW = 'learn/users/FOLLOW';
 const DO_NOT_FOLLOW = 'learn/users/DO_NOT_FOLLOW';
@@ -10,7 +10,7 @@ const TOGGLE_IS_FETCHING = 'learn/users/TOGGLE_IS_FETCHING';
 const TOGGLE_FOLLOWING_PROGRESS = 'learn/users/TOGGLE_FOLLOWING_PROGRESS';
 
 type UsersState = {
-    users: Array<User>;
+    users: Array<TUser>;
     totalCount: number;
     pageSize: number;
     currentPage: number;
@@ -104,10 +104,10 @@ export const doNotFollowSuccess = (userId: number): DoNotFollowSuccessActionType
 
 type SetUsersActionType = {
     type: typeof SET_USERS;
-    users: Array<User>;
+    users: Array<TUser>;
 };
 
-export const setUsers = (users: Array<User>): SetUsersActionType => ({ type: SET_USERS, users });
+export const setUsers = (users: Array<TUser>): SetUsersActionType => ({ type: SET_USERS, users });
 
 type SetTotalUsersCountActionType = {
     type: typeof SET_USERS_TOTAL_COUNT;

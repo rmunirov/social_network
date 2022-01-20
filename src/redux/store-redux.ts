@@ -7,7 +7,7 @@ import usersReducer from './UsersReducer';
 import authReducer from './AuthReducer';
 import appReducer from './AppReducer';
 
-const reducers = combineReducers({
+const rootReducers = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
     sidebar: sidebarReducer,
@@ -16,7 +16,12 @@ const reducers = combineReducers({
     app: appReducer,
 });
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
+const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
+
+type TRootReducer = typeof rootReducers;
+export type TAppState = ReturnType<TRootReducer>;
 
 export default store;
