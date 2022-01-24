@@ -1,12 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import classNames from 'classnames/bind';
+import { TFriend } from '../../../types/types';
 import styles from './FriendList.module.scss';
 
 const cn = classNames.bind(styles);
 const CLASS_NAME = 'FriendList';
 
-const FriendList = ({ friendList }) => {
+type Props = {
+    friendList: Array<TFriend>;
+};
+
+const FriendList: FC<Props> = ({ friendList }) => {
     return (
         <div className={cn(`${CLASS_NAME}__list`)}>
             <h3>My Friend</h3>
@@ -19,10 +23,6 @@ const FriendList = ({ friendList }) => {
             </div>
         </div>
     );
-};
-
-FriendList.propTypes = {
-    friendList: PropTypes.array,
 };
 
 export default FriendList;

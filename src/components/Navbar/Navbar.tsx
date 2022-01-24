@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './Navbar.module.scss';
@@ -7,7 +7,7 @@ import FriendListContainer from './FriendList/FriendListContainer';
 const cn = classNames.bind(styles);
 const CLASS_NAME = 'Navbar';
 
-const Navbar = () => {
+const Navbar: FC = () => {
     return (
         <div>
             <nav className={cn(CLASS_NAME)}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import { FORM_ERROR } from 'final-form';
 import classNames from 'classnames/bind';
@@ -7,19 +7,36 @@ import userPhoto from '../../../assets/image/user.png';
 import ProfileStatus from '../ProfileStatus/ProfileStatus';
 import { required } from '../../../utils/validators/validators';
 import { Input, TextArea } from '../../common/FormControls/FormControls';
+import { TProfile } from '../../../types/types';
 import styles from './ProfileInfo.module.scss';
 
 const cn = classNames.bind(styles);
 const CLASS_NAME = 'ProfileInfo';
 
-const ProfileInfo = ({ profile, updatePhoto, isOwner, status, setStatus, updateProfile }) => {
+type ProfileInfoPropsType = {
+    profile: TProfile;
+    updatePhoto: (photo: string) => void;
+    isOwner: boolean;
+    status: string;
+    setStatus: () => void;
+    updateProfile: (data: any) => string;
+};
+
+const ProfileInfo: FC<ProfileInfoPropsType> = ({
+    profile,
+    updatePhoto,
+    isOwner,
+    status,
+    setStatus,
+    updateProfile,
+}) => {
     const [editMode, setEditMode] = useState(false);
 
     const activateEditMode = () => {
         setEditMode(true);
     };
 
-    const deactivateEditMode = async (formData) => {
+    const deactivateEditMode = async (formData: any) => {
         const message = await updateProfile(formData);
         if (message === undefined) {
             setEditMode(false);
@@ -54,16 +71,13 @@ const ProfileInfo = ({ profile, updatePhoto, isOwner, status, setStatus, updateP
     );
 };
 
-ProfileInfo.propTypes = {
-    profile: PropTypes.object,
-    updatePhoto: PropTypes.func,
-    isOwner: PropTypes.bool,
-    status: PropTypes.string,
-    setStatus: PropTypes.func,
-    updateProfile: PropTypes.func,
+type ProfileReduxFormPropsType = {
+    onSubmit: (formData: any) => void;
+    initialData: any;
+    profile: TProfile;
 };
 
-const ProfileReduxForm = ({ onSubmit, initialData, profile }) => {
+const ProfileReduxForm: FC<ProfileReduxFormPropsType> = ({ onSubmit, initialData, profile }) => {
     return (
         <Form
             onSubmit={onSubmit}
@@ -116,13 +130,16 @@ const ProfileReduxForm = ({ onSubmit, initialData, profile }) => {
     );
 };
 
-ProfileReduxForm.propTypes = {
-    onSubmit: PropTypes.func,
-    initialData: PropTypes.object,
-    profile: PropTypes.object,
+type ProfileInfoDataPropsType = {
+    profile: TProfile;
+    updatePhoto: (photo: string) => void;
+    isOwner: boolean;
+    status: string;
+    setStatus: () => void;
+    activateEditMode: () => void;
 };
 
-const ProfileInfoData = ({
+const ProfileInfoData: FC<ProfileInfoDataPropsType> = ({
     profile,
     updatePhoto,
     isOwner,
@@ -150,17 +167,14 @@ const ProfileInfoData = ({
     );
 };
 
-ProfileInfoData.propTypes = {
-    profile: PropTypes.object,
-    updatePhoto: PropTypes.func,
-    isOwner: PropTypes.bool,
-    status: PropTypes.string,
-    setStatus: PropTypes.func,
-    activateEditMode: PropTypes.func,
+type ProfilePhotoPropsType = {
+    profile: TProfile;
+    updatePhoto: (photo: string) => void;
+    isOwner: boolean;
 };
 
-const ProfilePhoto = ({ profile, updatePhoto, isOwner }) => {
-    const onChangePhoto = (event) => {
+const ProfilePhoto: FC<ProfilePhotoPropsType> = ({ profile, updatePhoto, isOwner }) => {
+    const onChangePhoto = (event: any) => {
         if (event.target.files.length) {
             updatePhoto(event.target.files[0]);
         }
@@ -180,21 +194,20 @@ const ProfilePhoto = ({ profile, updatePhoto, isOwner }) => {
     );
 };
 
-ProfilePhoto.propTypes = {
-    profile: PropTypes.object,
-    updatePhoto: PropTypes.func,
-    isOwner: PropTypes.bool,
+type ProfileFullNamePropsType = {
+    profile: TProfile;
 };
 
-const ProfileFullName = ({ profile }) => {
+const ProfileFullName: FC<ProfileFullNamePropsType> = ({ profile }) => {
     return <div className={cn(`${CLASS_NAME}__description__name`)}>{profile.fullName}</div>;
 };
 
-ProfileFullName.propTypes = {
-    profile: PropTypes.object,
+type ProfileContactPropsType = {
+    title: string;
+    value: string;
 };
 
-const ProfileContact = ({ title, value }) => {
+const ProfileContact: FC<ProfileContactPropsType> = ({ title, value }) => {
     return (
         <div>
             <b>{title}: </b>
@@ -203,12 +216,11 @@ const ProfileContact = ({ title, value }) => {
     );
 };
 
-ProfileContact.propTypes = {
-    title: PropTypes.string,
-    value: PropTypes.string,
+type ProfileContactsPropsType = {
+    profile: TProfile;
 };
 
-const ProfileContacts = ({ profile }) => {
+const ProfileContacts: FC<ProfileContactsPropsType> = ({ profile }) => {
     return (
         <div className={cn(`${CLASS_NAME}__description__contacts`)}>
             {Object.keys(profile.contacts).map((key) => {
@@ -218,16 +230,16 @@ const ProfileContacts = ({ profile }) => {
     );
 };
 
-ProfileContacts.propTypes = {
-    profile: PropTypes.object,
+type ProfileDescriptionPropsType = {
+    profile: TProfile;
 };
 
-const ProfileDescription = ({ profile }) => {
+const ProfileDescription: FC<ProfileDescriptionPropsType> = ({ profile }) => {
     return (
         <div>
-            <div className={cn(`${CLASS_NAME}__description__about`)}>
-                <b>About me: </b> {profile.aboutMe === null ? 'Info about me...' : profile.aboutMe}
-            </div>
+            {/*<div className={cn(`${CLASS_NAME}__description__about`)}>*/}
+            {/*    <b>About me: </b> {profile.aboutMe === null ? 'Info about me...' : profile.aboutMe}*/}
+            {/*</div>*/}
 
             <div className={cn(`${CLASS_NAME}__description__lookingJob`)}>
                 <b>Looking for a job: </b> {profile.lookingForAJob ? 'yes' : 'no'}
@@ -243,10 +255,6 @@ const ProfileDescription = ({ profile }) => {
             </div>
         </div>
     );
-};
-
-ProfileDescription.propTypes = {
-    profile: PropTypes.object,
 };
 
 export default ProfileInfo;

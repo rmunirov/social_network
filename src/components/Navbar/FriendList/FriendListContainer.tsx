@@ -1,16 +1,13 @@
 import { connect } from 'react-redux';
+import { TAppState } from '../../../redux/store-redux';
 import FriendList from './FriendList';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: TAppState) => {
     return {
         friendList: state.sidebar.friends,
     };
 };
 
-const mapDispatchToProps = () => {
-    return {};
-};
-
-const FriendListContainer = connect(mapStateToProps, mapDispatchToProps)(FriendList);
+const FriendListContainer = connect(mapStateToProps)(FriendList);
 
 export default FriendListContainer;

@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { FC, memo } from 'react';
 import { Field, Form } from 'react-final-form';
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { TextArea } from '../../common/FormControls/FormControls';
 import { composeValidators, maxLength, required } from '../../../utils/validators/validators';
+import { TPost } from '../../../types/types';
 import Post from './Post/Post';
 import styles from './Posts.module.scss';
 
 const cn = classNames.bind(styles);
 const CLASS_NAME = 'Posts';
 
-const PostReduxForm = ({ onSubmit }) => {
+type PostReduxFormPropsType = {
+    onSubmit: (formData: any) => void;
+};
+
+const PostReduxForm: FC<PostReduxFormPropsType> = ({ onSubmit }) => {
     return (
         <Form
             onSubmit={onSubmit}
@@ -33,16 +37,17 @@ const PostReduxForm = ({ onSubmit }) => {
     );
 };
 
-PostReduxForm.propTypes = {
-    onSubmit: PropTypes.func,
+type PostsPropsType = {
+    posts: Array<TPost>;
+    addPost: (post: string) => void;
 };
 
-const Posts = React.memo(({ posts, addPost }) => {
+const Posts: FC<PostsPropsType> = memo(({ posts, addPost }) => {
     const postsJSX = posts.map((message) => (
         <Post key={message.id} message={message.message} likeCount={message.likesCount} />
     ));
 
-    const onAddPost = (formData) => {
+    const onAddPost = (formData: any) => {
         addPost(formData.newPostText);
     };
 
@@ -54,11 +59,6 @@ const Posts = React.memo(({ posts, addPost }) => {
         </div>
     );
 });
-
-Posts.propTypes = {
-    posts: PropTypes.array,
-    addPost: PropTypes.func,
-};
 
 Posts.displayName = 'Posts';
 

@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 
 const cn = classNames.bind(styles);
 const CLASS_NAME = 'Header';
 
-const Header = ({ isAuth, login, logout }) => {
+type HeaderProps = {
+    isAuth: boolean;
+    login: string;
+    logout: () => void;
+};
+
+const Header: FC<HeaderProps> = ({ isAuth, login, logout }) => {
     return (
         <header className={cn(CLASS_NAME)}>
             <div className={cn(`${CLASS_NAME}__photo`)}>
@@ -27,12 +32,6 @@ const Header = ({ isAuth, login, logout }) => {
             </div>
         </header>
     );
-};
-
-Header.propTypes = {
-    isAuth: PropTypes.bool,
-    login: PropTypes.string,
-    logout: PropTypes.func,
 };
 
 export default Header;

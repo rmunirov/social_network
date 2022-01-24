@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Field, Form } from 'react-final-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { FORM_ERROR } from 'final-form';
-import PropTypes from 'prop-types';
 import { Input } from '../common/FormControls/FormControls';
 import { composeValidators, minLength, required } from '../../utils/validators/validators';
 import { login } from '../../redux/AuthReducer';
+import { TAppState } from '../../redux/store-redux';
 
-const LoginReduxForm = ({ onSubmit, captchaUrl }) => {
+type LoginReduxFormProps = {
+    onSubmit: (formData: any) => void;
+    captchaUrl: string;
+};
+
+const LoginReduxForm: FC<LoginReduxFormProps> = ({ onSubmit, captchaUrl }) => {
     return (
         <Form
             onSubmit={onSubmit}
@@ -52,14 +57,15 @@ const LoginReduxForm = ({ onSubmit, captchaUrl }) => {
     );
 };
 
-LoginReduxForm.propTypes = {
-    captchaUrl: PropTypes.string,
-    onSubmit: PropTypes.func,
+type LoginFormProps = {
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => any;
+    isAuth: boolean;
+    captchaUrl: string;
 };
 
-const LoginForm = ({ login, isAuth, captchaUrl }) => {
-    const onSubmit = async (formData) => {
-        const message = await login(
+const LoginForm: FC<LoginFormProps> = ({ login, isAuth, captchaUrl }) => {
+    const onSubmit = async (formData: any) => {
+        const message = login(
             formData.email,
             formData.password,
             formData.rememberMe,
@@ -80,13 +86,21 @@ const LoginForm = ({ login, isAuth, captchaUrl }) => {
     );
 };
 
-LoginForm.propTypes = {
-    login: PropTypes.func,
-    isAuth: PropTypes.bool,
-    captchaUrl: PropTypes.string,
+type TStateProps = {
+    isAuth: boolean;
+    loginMessage: string;
+    captchaUrl: string;
 };
 
-const mapStateToProps = (state) => {
+type TDispatchProps = {
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => any;
+};
+
+type TOwnProps = {
+    title: string;
+};
+
+const mapStateToProps = (state: TAppState) => {
     return {
         isAuth: state.auth.isAuth,
         loginMessage: state.auth.message,
@@ -98,4 +112,7 @@ const mapDispatchToProps = {
     login,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect<TStateProps, TDispatchProps, TOwnProps, TAppState>(
+    mapStateToProps,
+    mapDispatchToProps
+)(LoginForm);
